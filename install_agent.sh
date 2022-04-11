@@ -55,3 +55,4 @@ echo ""
 sed -i "s/Hostname=Zabbix server/Hostname=${REPLY}/" /etc/zabbix/zabbix_agentd.conf
 systemctl start zabbix-agent
 systemctl enable zabbix-agent
+rm -f zabbix-release*.deb
