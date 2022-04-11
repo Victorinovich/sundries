@@ -48,7 +48,6 @@ echo ""
 echo ""
 echo  "Введите имя этого хоста для Zabbix сервера - не обязательно, чтобы оно совпадало с реальным хостнеймом"
 echo -n "Это имя используйте при создании узла сети в Zabbix сервере:  "
-
 read NEWHOSTNAME
 
 sed -i "s/Hostname=Zabbix server/Hostname=${NEWHOSTNAME}/" /etc/zabbix/zabbix_agentd.conf
