@@ -66,7 +66,7 @@ select yn in "Virt" "Real"
 do
 case $yn in
 Virt ) 
-exit
+break
 ;;
 Real ) 
 echo "UserParameter=mdadm.status, egrep -c \"\[.*_.*\]\" /proc/mdstat" >> /etc/zabbix/zabbix_agentd.d/userparameters_mdadm.conf
@@ -77,9 +77,8 @@ UserParameter=storage.get[*],if [ -n \"\$1\" ]; then /usr/sbin/smartctl -i -H -A
 UserParameter=smartctl.version,/usr/sbin/smartctl --version | grep -Eo \"^smartctl\s[0-9\.[:space:]\r-]+\" | sed -e 's/^smartctl.//'" >> /etc/zabbix/zabbix_agentd.d/userparameters_smartmontools.conf
 curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/smartctl-storage-discovery.sh > /usr/local/bin/smartctl-storage-discovery.sh
 chmod +x /usr/local/bin/smartctl-storage-discovery.sh
-exit
+break
 ;;
 esac
 done
-sleep 7
 systemctl restart zabbix-agent
