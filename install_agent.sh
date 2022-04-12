@@ -1,4 +1,5 @@
 #!/bin/bash
+systemctl stop zabbix-agent
 apt purge zabbix-agent zabbix-release -y
 DISTR=`lsb_release -i  | awk '{print $3}'`
 RELEASE=`lsb_release -r  | awk '{print $2}'`
