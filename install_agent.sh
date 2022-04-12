@@ -81,5 +81,5 @@ exit
 ;;
 esac
 done
-
+sleep 7
 systemctl restart zabbix-agent
