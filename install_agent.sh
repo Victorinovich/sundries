@@ -41,10 +41,12 @@ case $yn in
 Internal ) 
 sed -i "s/Server=127.0.0.1/Server=10.10.10.242/" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=10.10.10.242:10051/" /etc/zabbix/zabbix_agentd.conf
+exit
 ;;
 External ) 
 sed -i "s/Server=127.0.0.1/Server=zabbix1.sys.ilogy.ru/" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=zabbix1.sys.ilogy.ru:57799/" /etc/zabbix/zabbix_agentd.conf
+exit
 ;;
 esac
 done
