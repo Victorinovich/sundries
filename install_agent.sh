@@ -32,8 +32,23 @@ RELEASE=`lsb_release -r  | awk '{print $2}'`
      echo "Дистрибутив не поддерживается"
    exit
    fi
+
+echo ""
+echo "Сервер находится во внутренней сети Ilogy или это внешний сервер?"
+select yn in "Internal" "External"
+do
+case $yn in
+Internal ) 
+sed -i "s/Server=127.0.0.1/Server=10.10.10.242/" /etc/zabbix/zabbix_agentd.conf
+sed -i "s/ServerActive=127.0.0.1/ServerActive=10.10.10.242:10051/" /etc/zabbix/zabbix_agentd.conf
+;;
+External ) 
 sed -i "s/Server=127.0.0.1/Server=zabbix1.sys.ilogy.ru/" /etc/zabbix/zabbix_agentd.conf
 sed -i "s/ServerActive=127.0.0.1/ServerActive=zabbix1.sys.ilogy.ru:57799/" /etc/zabbix/zabbix_agentd.conf
+;;
+esac
+done
+
 echo ""
 echo  "Введите имя этого хоста для Zabbix сервера - не обязательно, чтобы оно совпадало с реальным хостнеймом"
 read -p "Это имя используйте при создании узла сети в Zabbix сервере: "
@@ -44,14 +59,14 @@ systemctl enable zabbix-agent
 rm -f zabbix-release*.deb*
 
 echo ""
-echo "Сервер виртуальный? (y/n)"
-select yn in "yes" "no"
+echo "Сервер виртуальный или реальный (дополнительно установится конфигурация для SMART и MDMADM)?"
+select yn in "Virt" "Real"
 do
 case $yn in
-yes ) 
+Virt ) 
 exit
 ;;
-no ) 
+Real ) 
 echo "UserParameter=mdadm.status, egrep -c \"\[.*_.*\]\" /proc/mdstat" >> /etc/zabbix/zabbix_agentd.d/userparameters_mdadm.conf
 apt install smartmontools -y
 chmod u+s /usr/sbin/smartctl
@@ -60,6 +75,7 @@ UserParameter=storage.get[*],if [ -n \"\$1\" ]; then /usr/sbin/smartctl -i -H -A
 UserParameter=smartctl.version,/usr/sbin/smartctl --version | grep -Eo \"^smartctl\s[0-9\.[:space:]\r-]+\" | sed -e 's/^smartctl.//'" >> /etc/zabbix/zabbix_agentd.d/userparameters_smartmontools.conf
 curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/smartctl-storage-discovery.sh > /usr/local/bin/smartctl-storage-discovery.sh
 chmod +x /usr/local/bin/smartctl-storage-discovery.sh
+exit
 ;;
 esac
 done
