@@ -70,12 +70,12 @@ Virt )
 break
 ;;
 Real ) 
-echo "UserParameter=mdadm.status, egrep -c \"\[.*_.*\]\" /proc/mdstat" >> /etc/zabbix/zabbix_agentd.d/userparameters_mdadm.conf
+echo "UserParameter=mdadm.status, egrep -c \"\[.*_.*\]\" /proc/mdstat" > /etc/zabbix/zabbix_agentd.d/userparameters_mdadm.conf
 apt install smartmontools -y
 chmod u+s /usr/sbin/smartctl
 echo "UserParameter=storage.discovery[*], /usr/local/bin/smartctl-storage-discovery.sh
 UserParameter=storage.get[*],if [ -n \"\$1\" ]; then /usr/sbin/smartctl -i -H -A -l error -l background \$1; fi
-UserParameter=smartctl.version,/usr/sbin/smartctl --version | grep -Eo \"^smartctl\s[0-9\.[:space:]\r-]+\" | sed -e 's/^smartctl.//'" >> /etc/zabbix/zabbix_agentd.d/userparameters_smartmontools.conf
+UserParameter=smartctl.version,/usr/sbin/smartctl --version | grep -Eo \"^smartctl\s[0-9\.[:space:]\r-]+\" | sed -e 's/^smartctl.//'" > /etc/zabbix/zabbix_agentd.d/userparameters_smartmontools.conf
 curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/smartctl-storage-discovery.sh > /usr/local/bin/smartctl-storage-discovery.sh
 chmod +x /usr/local/bin/smartctl-storage-discovery.sh
 break
