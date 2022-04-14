@@ -1,6 +1,7 @@
 #!/bin/bash
 systemctl stop zabbix-agent
 apt purge zabbix-agent zabbix-release -y
+#rm -rf /etc/zabbix
 DISTR=`lsb_release -i  | awk '{print $3}'`
 RELEASE=`lsb_release -r  | awk '{print $2}' | cut -f '1' -d.`
    if [[ $DISTR == "Debian" ]]
