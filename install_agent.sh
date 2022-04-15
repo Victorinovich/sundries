@@ -32,7 +32,7 @@ RELEASE=`lsb_release -r  | awk '{print $2}' | cut -f '1' -d.`
          esac
    else
      echo "Дистрибутив не поддерживается"
-   exit
+     exit
    fi
 
 echo ""
