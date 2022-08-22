@@ -1,5 +1,5 @@
 $client = new-object System.Net.WebClient
-[net.servicepointmanager]::securityprotocol = 'ssl3,tls,tls11,tls12'
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 $client.DownloadFile("https://cdn.zabbix.com/zabbix/binaries/stable/6.2/6.2.1/zabbix_agent-6.2.1-windows-amd64-openssl.msi", "$env:USERPROFILE\Downloads\zabbix_agent-6.2.1-windows-amd64-openssl.msi")
 write-host "Введите имя хоста - не обязательно, чтобы оно совпадало с реальным хостнеймом. Это имя используйте при создании узла сети на сервере Zabbix"
 $hostname=read-host
