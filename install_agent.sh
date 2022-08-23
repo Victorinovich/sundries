@@ -8,20 +8,20 @@ RELEASE=`lsb_release -r  | awk '{print $2}' | cut -f '1' -d.`
    then
          case "$RELEASE" in
          "9")
-         wget http://repo.zabbix.com/zabbix/6.2/debian/pool/main/z/zabbix-release/zabbix-release_6.2-1%2Bdebian9_all.deb
-         dpkg -i zabbix-release_6.2-1%2Bdebian9_all.deb
+         wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-3%2Bdebian9_all.deb
+         dpkg -i zabbix-release_6.0-3%2Bdebian9_all.deb
          apt update
          apt install zabbix-agent -y
          ;;
          "10")
-         wget http://repo.zabbix.com/zabbix/6.2/debian/pool/main/z/zabbix-release/zabbix-release_6.2-1%2Bdebian10_all.deb
-         dpkg -i zabbix-release_6.2-1%2Bdebian10_all.deb
+         wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-3%2Bdebian10_all.deb
+         dpkg -i zabbix-release_6.0-3%2Bdebian10_all.deb
          apt update
          apt install zabbix-agent -y
          ;;
          "11")
-         wget http://repo.zabbix.com/zabbix/6.2/debian/pool/main/z/zabbix-release/zabbix-release_6.2-1%2Bdebian11_all.deb
-         dpkg -i zabbix-release_6.2-1%2Bdebian11_all.deb
+         wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-3%2Bdebian11_all.deb
+         dpkg -i zabbix-release_6.0-3%2Bdebian11_all.deb
          apt update
          apt install zabbix-agent -y
          ;;
