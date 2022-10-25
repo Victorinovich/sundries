@@ -6,18 +6,18 @@ select distr in  "Debian_9" "Ubuntu_20.04" "Lubuntu_16.04"
 do
 case $distr in
 Debian_9 ) 
-wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix/zabbix-agent_6.0.7-1+debian9_amd64.deb
-apt install ./zabbix-agent_6.0.7-1+debian9_amd64.deb
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix/zabbix-agent_6.0.9-1+debian9_amd64.deb
+apt install ./zabbix-agent_6.0.9-1+debian9_amd64.deb
 break
 ;;
 Lubuntu_16.04 ) 
-wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix/zabbix-agent_6.0.7-1+ubuntu16.04_amd64.deb
-apt install ./zabbix-agent_6.0.7-1+ubuntu16.04_amd64.deb
+wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix/zabbix-agent_6.0.9-1+ubuntu16.04_amd64.deb
+apt install ./zabbix-agent_6.0.9-1+ubuntu16.04_amd64.deb
 break
 ;;
 Ubuntu_20.04 )
-wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix/zabbix-agent_6.0.7-1+ubuntu20.04_amd64.deb
-apt install ./zabbix-agent_6.0.7-1+ubuntu20.04_amd64.deb
+wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix/zabbix-agent_6.0.9-1+ubuntu20.04_amd64.deb
+apt install ./zabbix-agent_6.0.9-1+ubuntu20.04_amd64.deb
 break
 ;;
 esac
