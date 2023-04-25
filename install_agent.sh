@@ -7,12 +7,6 @@ RELEASE=`lsb_release -r  | awk '{print $2}' | cut -f '1' -d.`
    if [[ $DISTR == "Debian" ]]
    then
          case "$RELEASE" in
-         "9")
-         wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4+debian9_all.deb
-         dpkg -i zabbix-release_6.0-4+debian9_all.deb
-         apt update
-         apt install zabbix-agent -y
-         ;;
          "10")
          wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4+debian10_all.deb
          dpkg -i zabbix-release_6.0-4+debian10_all.deb
