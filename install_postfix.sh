@@ -1,6 +1,7 @@
 #!/bin/bash
 
 apt update
+apt purge postfix
 echo "postfix postfix/mailname string $HOSTNAME.local" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
 apt install postfix mailutils -y
@@ -17,6 +18,8 @@ mydestination =
 relayhost =
 inet_interfaces = loopback-only
 " > /etc/postfix/main.cf
+
+sed -i 's/MAILADDR.*/MAILADDR alerts@ilogy.ru/' /etc/mdadm/mdadm.conf
 
 echo ""
 echo -n "Отправить тестовое письмо? (y/n):  "
