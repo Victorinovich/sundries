@@ -1,10 +1,10 @@
 #!/bin/bash
 
-apt update
-apt purge postfix
-echo "postfix postfix/mailname string $HOSTNAME.local" | debconf-set-selections
-echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
-apt install postfix mailutils -y
+#apt update
+#echo "postfix postfix/mailname string $HOSTNAME.local" | debconf-set-selections
+#echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
+#apt install postfix mailutils -y
+#dpkg-reconfigure postfix
 
 echo ""
 echo -n "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница:  "
@@ -18,6 +18,8 @@ mydestination =
 relayhost =
 inet_interfaces = loopback-only
 " > /etc/postfix/main.cf
+
+systemctl reload postfix
 
 sed -i 's/MAILADDR.*/MAILADDR alerts@ilogy.ru/' /etc/mdadm/mdadm.conf
 
