@@ -5,9 +5,10 @@
 #echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
 #apt install postfix mailutils -y
 #dpkg-reconfigure postfix
-
+echo "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница"
+echo "Пример - PVE Server - battenfeld1 "
 echo ""
-echo -n "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница:  "
+echo -n "  "
 read name
 chfn -f "$name" root
 
@@ -21,7 +22,7 @@ inet_interfaces = loopback-only
 
 systemctl reload postfix
 
-sed -i 's/MAILADDR.*/MAILADDR alerts@ilogy.ru/' /etc/mdadm/mdadm.conf
+sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 
 echo ""
 echo -n "Отправить тестовое письмо? (y/n):  "
