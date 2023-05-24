@@ -4,7 +4,7 @@ mkdir /etc/postfix
 dpkg-reconfigure -f noninteractive postfix
 
 echo "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница"
-echo "Пример - PVE Server - battenfeld1 "
+echo "Пример - PVE Battenfeld1 или PVE Fabryka DC Yar"
 echo ""
 echo -n ""
 read name
