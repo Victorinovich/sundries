@@ -31,7 +31,7 @@ sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 
 echo "DEVICESCAN -m root -M test" > /etc/smartd.conf.test
 
-echo ""
+#echo ""
 #echo -n "Отправить тестовые письма? (y/n):  "
 #read DANET
 #if [[ $DANET == "y" || $DANET == "yes" ]]; then
