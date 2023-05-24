@@ -14,7 +14,7 @@ chfn -f "$name" root
 mymailname=$(cat /etc/mailname)
 
 # Postfix on a null client
-cp /etc/postfix/main.cf /etc/postfix/main.cf.original
+#cp /etc/postfix/main.cf /etc/postfix/main.cf.original
 echo "myhostname=$mymailname
 mydestination = 
 relayhost =
