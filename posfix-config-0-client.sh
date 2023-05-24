@@ -1,4 +1,8 @@
 #!/bin/bash
+mv /etc/postfix /etc/postfix-$(date "+%F_%H-%M")
+echo "postfix postfix/mailname string $HOSTNAME.local" | debconf-set-selections
+echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
+dpkg-reconfigure postfix
 
 echo "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница"
 echo "Пример - PVE Server - battenfeld1 "
