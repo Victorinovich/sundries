@@ -1,5 +1,5 @@
 #!/bin/bash
-mv /etc/postfix /etc/postfix-$(date "+%F_%H-%M")
+mv /etc/postfix /etc/postfix.$(date "+%F--%H-%M-%S")
 dpkg-reconfigure -f noninteractive postfix
 
 echo "Введите имя для почтового поля FROM - отправителя, от которого будут отсылаться письма, допустима только латиница"
