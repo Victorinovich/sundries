@@ -32,10 +32,10 @@ sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 echo "DEVICESCAN -m root -M test" > /etc/smartd.conf.test
 
 echo ""
-echo -n "Отправить тестовые письма? (y/n):  "
-read DANET
-if [[ $DANET == "y" || $DANET == "yes" ]]; then
-    echo "Test" | mail -s "Test" root
+#echo -n "Отправить тестовые письма? (y/n):  "
+#read DANET
+#if [[ $DANET == "y" || $DANET == "yes" ]]; then
+    #echo "Test" | mail -s "Test" root
     mdadm --monitor --scan --test --oneshot
     smartd -c /etc/smartd.conf.test
     service smartd restart
@@ -43,4 +43,4 @@ if [[ $DANET == "y" || $DANET == "yes" ]]; then
     echo ""
     echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
     echo ""
-fi
+#fi
