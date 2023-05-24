@@ -25,7 +25,7 @@ echo "root alerts@ilogy.ru" > /etc/postfix/recipient_canonical
 postmap /etc/postfix/recipient_canonical
 echo "/^From: (.*)/ REPLACE From: $name <root@$mymailname>" > /etc/postfix/smtp_header_checks
 
-systemctl reload postfix
+systemctl restart postfix
 
 sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 
@@ -40,8 +40,7 @@ if [[ $DANET == "y" || $DANET == "yes" ]]; then
     smartd -c /etc/smartd.conf.test
     service smartd restart
     rm -f /etc/smartd.conf.test
+    echo ""
+    echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
+    echo ""
 fi
-
-echo ""
-echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
-echo ""
