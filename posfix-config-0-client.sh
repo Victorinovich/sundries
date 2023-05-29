@@ -13,7 +13,6 @@ chfn -f "$name" root
 mymailname=$(cat /etc/mailname)
 
 # Postfix on a null client
-#cp /etc/postfix/main.cf /etc/postfix/main.cf.original
 echo "myhostname=$mymailname
 mydestination = 
 relayhost =
@@ -29,18 +28,11 @@ systemctl restart postfix
 
 sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 
+mdadm --monitor --scan --test --oneshot
 echo "DEVICESCAN -m root -M test" > /etc/smartd.conf.test
-
-#echo ""
-#echo -n "Отправить тестовые письма? (y/n):  "
-#read DANET
-#if [[ $DANET == "y" || $DANET == "yes" ]]; then
-    #echo "Test" | mail -s "Test" root
-    mdadm --monitor --scan --test --oneshot
-    smartd -c /etc/smartd.conf.test
-    service smartd restart
-    rm -f /etc/smartd.conf.test
-    echo ""
-    echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
-    echo ""
-#fi
+smartd -c /etc/smartd.conf.test
+service smartd restart
+rm -f /etc/smartd.conf.test
+echo ""
+echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
+echo ""
