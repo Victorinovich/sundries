@@ -55,8 +55,8 @@ iptables -A FORWARD -i tun+ -o tun+ -j DROP
 iptables -A OUTPUT -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
 # Делаем NAT-маскарадинг для подсети OpenVPN
 iptables -t nat -A POSTROUTING -s $SUBNET_OVPN -o $INTERFACE -j MASQUERADE
-" > /etc/iptables/iptables-config.sh
+" > /etc/iptables/iptables-rules.sh
 
-chmod +x /etc/iptables/iptables-config.sh
+chmod +x /etc/iptables/iptables-rules.sh
 
 echo "pre-up /etc/iptables/iptables-rules.sh" >> /etc/network/interfaces
