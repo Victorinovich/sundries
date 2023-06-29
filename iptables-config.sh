@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir /etc/iptables
 
 echo '#!/bin/bash
 
