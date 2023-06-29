@@ -23,12 +23,9 @@ iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 iptables -P FORWARD DROP
 # Разрешаем SSH к серверу, трафик на локальном интерфейсе и пинг
-iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT
-
-# Пока непонятно, нужна ли эта строка, оставил на всякий случай, но без неё всё работает
-#iptables -A INPUT -i tun+ -j ACCEPT
 
 # Разрешаем клиентские подключения к OpenVPN серверу
 iptables -A INPUT -i $INTERFACE -p udp --dport $PORT_OVPN -j ACCEPT
@@ -36,9 +33,10 @@ iptables -A INPUT -i $INTERFACE -p udp --dport $PORT_OVPN -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 #########################################################################################################################################
-# Если комментируем 4 строки из следующего блока, то расскоментируем эти две
-#iptables -I FORWARD 1 -i $INTERFACE -o tun0 -j ACCEPT
-#iptables -I FORWARD 1 -i tun0 -o $INTERFACE -j ACCEPT
+# Если комментируем 4 строки из следующего блока, то расскоментируем эти две 
+# Здесь могут также быть специфические настройки для изоляции сетей - например для External серверов
+#iptables -A FORWARD -i $INTERFACE -o tun0 -j ACCEPT
+#iptables -A FORWARD -i tun0 -o $INTERFACE -j ACCEPT
 
 # Разрешаем доступ подсети OpenVPN к локальной подсети самого сервера, но запрещаем доступ к шлюзу по-умолчанию (в обе стороны)
 # перекрываем таким образом доступ к интернету через VPN-сеть
