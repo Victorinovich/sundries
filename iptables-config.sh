@@ -60,17 +60,3 @@ iptables -t nat -A POSTROUTING -s $SUBNET_OVPN -o $INTERFACE -j MASQUERADE
 chmod +x /etc/iptables/iptables-config.sh
 
 echo "pre-up /etc/iptables/iptables-rules.sh" >> /etc/network/interfaces
-
-
-systemctl restart postfix
-
-sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
-
-mdadm --monitor --scan --test --oneshot
-echo "DEVICESCAN -m root -M test" > /etc/smartd.conf.test
-smartd -c /etc/smartd.conf.test
-service smartd restart
-rm -f /etc/smartd.conf.test
-echo ""
-echo "Проверьте пришли ли тестовые письма от SMARTD, MDADM"
-echo ""
