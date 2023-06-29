@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "#!/bin/bash
+echo '#!/bin/bash
 
 # Не забываем проверить (отредактировать) переменные, особенно INTERFACE
 
@@ -54,8 +54,7 @@ iptables -A FORWARD -i tun+ -o tun+ -j DROP
 # Выпускаем любой исходящий трафик наружу
 iptables -A OUTPUT -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
 # Делаем NAT-маскарадинг для подсети OpenVPN
-iptables -t nat -A POSTROUTING -s $SUBNET_OVPN -o $INTERFACE -j MASQUERADE
-" > /etc/iptables/iptables-rules.sh
+iptables -t nat -A POSTROUTING -s $SUBNET_OVPN -o $INTERFACE -j MASQUERADE' > /etc/iptables/iptables-rules.sh
 
 chmod +x /etc/iptables/iptables-rules.sh
 
