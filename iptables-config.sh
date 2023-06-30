@@ -1,5 +1,8 @@
 #!/bin/bash
-mkdir /etc/iptables
+
+if [ ! -d /etc/iptables ]; then
+    mkdir /etc/iptables
+fi
 
 echo '#!/bin/bash
 
