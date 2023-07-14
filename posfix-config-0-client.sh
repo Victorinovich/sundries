@@ -12,7 +12,7 @@ chfn -f "$name" root
 
 mymailname=$(cat /etc/mailname)
 
-# Postfix on a null client
+# Postfix on a null-client
 echo "myhostname=$mymailname
 mydestination = 
 relayhost =
@@ -24,7 +24,9 @@ echo "root alerts@ilogy.ru" > /etc/postfix/recipient_canonical
 postmap /etc/postfix/recipient_canonical
 echo "/^From: (.*)/ REPLACE From: $name <root@$mymailname>" > /etc/postfix/smtp_header_checks
 
-systemctl restart postfix
+touch /etc/postfix/postfix-files
+
+postfix reload
 
 sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
 
