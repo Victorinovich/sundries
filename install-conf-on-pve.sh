@@ -1,5 +1,11 @@
 #!/bin/bash
 echo "acl:1:/:@zabbixAPI:zabbix_API_monitoring:" >> /etc/pve/user.cfg
+echo ""
+echo -n "Введите значение APIToken:  "
+read APITOKEN
+echo ""
+export APITOKEN=$APITOKEN
+echo "APITOKEN=$APITOKEN" >> /etc/environment
 
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/proxmox-backup-discovery.sh > /etc/zabbix/zabbix_agentd.d/proxmox-backup-discovery.sh
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/check-running-machines-to-enable-backup.sh > /etc/zabbix/zabbix_agentd.d/check-running-machines-to-enable-backup.sh
