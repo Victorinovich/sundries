@@ -7,8 +7,9 @@ echo ""
 export APITOKEN=$APITOKEN
 echo "APITOKEN=$APITOKEN" >> /etc/environment
 pveum role add zabbix_API_monitoring --privs "Datastore.Allocate Datastore.AllocateSpace Datastore.Audit Sys.Audit VM.Audit VM.Backup"
-pveum group add zabbixAPI
-pveum user add zabbixAPI@pve -comment "user for PVE API access read"
+pveum group add zabbixAPI -comment "group for PVE API access read"
+pveum acl modify / -group zabbixAPI -role zabbix_API_monitoring
+pveum user add zabbixAPI@pve 
 
 
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/proxmox-backup-discovery.sh > /etc/zabbix/zabbix_agentd.d/proxmox-backup-discovery.sh
