@@ -7,6 +7,7 @@ echo ""
 export APITOKEN=$APITOKEN
 echo "APITOKEN=$APITOKEN" >> /etc/environment
 pveum role add zabbix_API_monitoring --privs "Datastore.Allocate Datastore.AllocateSpace Datastore.Audit Sys.Audit VM.Audit VM.Backup"
+pveum group add zabbixAPI
 pveum user add zabbixAPI@pve -comment "user for PVE API access read"
 
 
