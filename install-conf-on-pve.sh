@@ -10,7 +10,7 @@ pveum role add zabbix_API_monitoring --privs "Datastore.Allocate Datastore.Alloc
 pveum group add zabbixAPI -comment "group for PVE API access read"
 pveum acl modify / -group zabbixAPI -role zabbix_API_monitoring
 pveum user add zabbixAPI@pve 
-
+pveum user modify zabbixAPI@pve -group zabbixAPI
 
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/proxmox-backup-discovery.sh > /etc/zabbix/zabbix_agentd.d/proxmox-backup-discovery.sh
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/check-running-machines-to-enable-backup.sh > /etc/zabbix/zabbix_agentd.d/check-running-machines-to-enable-backup.sh
