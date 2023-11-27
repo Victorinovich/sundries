@@ -9,11 +9,12 @@ pveum acl modify / -group zabbixAPI -role zabbix_API_monitoring
 pveum user add zabbixAPI@pve 
 pveum user modify zabbixAPI@pve -group zabbixAPI
 pveum user token add zabbixAPI@pve zabbix --privsep 0 > token.temp
-var1=`cat token.temp | grep tokenid | awk '{print $4}'`
-var2=`cat token.temp | grep value | tail -n1 | awk '{print $4}'`
+var1=`cat ./token.temp | grep tokenid | awk '{print $4}'`
+var2=`cat ./token.temp | grep value | tail -n1 | awk '{print $4}'`
 APITOKEN=`echo -n $var1"="$var2`
-export APITOKEN=$APITOKEN
+#export APITOKEN=$APITOKEN
 echo "APITOKEN=$APITOKEN" >> /etc/environment
+rm ./token.temp
 
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/proxmox-backup-discovery.sh > /etc/zabbix/zabbix_agentd.d/proxmox-backup-discovery.sh
 #curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/check-running-machines-to-enable-backup.sh > /etc/zabbix/zabbix_agentd.d/check-running-machines-to-enable-backup.sh
