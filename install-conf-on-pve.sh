@@ -18,5 +18,5 @@ curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/proxmox-l
 curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/pbs-verify-backup-discovery.sh > /etc/zabbix/zabbix_agentd.d/pbs-verify-backup-discovery.sh
 curl -Ls https://raw.githubusercontent.com/Victorinovich/sundries/main/userparameters_pveapi_scripts.conf > /etc/zabbix/zabbix_agentd.d/userparameters_pveapi_scripts.conf
 chmod +x /etc/zabbix/zabbix_agentd.d/*.sh
-#sleep 3
-#systemctl restart zabbix-agent
+sleep 3
+systemctl restart zabbix-agent
