@@ -1,5 +1,4 @@
 #!/bin/bash
-#echo "acl:1:/:@zabbixAPI:zabbix_API_monitoring:" >> /etc/pve/user.cfg
 #echo ""
 #echo -n "Введите значение APIToken:  "
 #read APITOKEN
@@ -9,7 +8,7 @@ pveum group add zabbixAPI -comment "group for PVE API access read"
 pveum acl modify / -group zabbixAPI -role zabbix_API_monitoring
 pveum user add zabbixAPI@pve 
 pveum user modify zabbixAPI@pve -group zabbixAPI
-pveum user token add zabbixAPI@pve zabbix
+pveum user token add zabbixAPI@pve zabbix --privsep 0
 #export APITOKEN=$APITOKEN
 #echo "APITOKEN=$APITOKEN" >> /etc/environment
 
