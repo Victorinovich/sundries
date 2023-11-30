@@ -13,19 +13,20 @@ rndfile=$(($RANDOM % 10000 + 1))
 # если вдруг файл существует, то обнуляем его
 echo -n > /tmp/$rndfile.txt
 
-# автоматически через API определяем ноду PVE
-node=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes | jq -jr '.data[] | .node,"\n"' | head -n1`
-
+# В массив arr0 выгружаем все ноды
+arr0=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes | jq -jr '.data[] | .node,"\n"')))
+for node in ${arr0[*]}
+do
 # В массив arr1 выгружаем все VMID и их статусы - включена или выключена (число текст через пробел)
-arr1=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes/$node/qemu | jq -Sjr '.data[] | .vmid," ",.status,"\n"' | sort -u)))
+arr1=(${arr1[@]} $(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes/$node/qemu | jq -Sjr '.data[] | .vmid," ",.status,"\n"' | sort -u)))
+done
+#echo ${arr1[@]}
 
 # В массив arr2 выводим VMID, у которых бэкапы включены
 arr2=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .enabled,"=",.vmid,"=","\n"' | sed -r "s/(${storage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g") | tr " " "\n" | sort -u))
-#echo ${arr2[@]}
 
 # В массив arr3 помещаем исключённые макросом VMID (т.е. виртуалки, которые работают, но для которых не нужен обязательный бэкап)
 arr3=($(echo $VMIDEXCLUDE | sed "s/,/ /g" | sort -u))
-#echo ${arr3[@]}
 
 # прогоняем и фильтруем список всех VMID (чётные элементы массива 0, 2, 4, 6, ...) из массива arr1 
 for (( i=0; $i<=${#arr1[*]}; i=$i+2 )); do
