@@ -44,7 +44,7 @@ arr1=($(echo $string_stor | tr " " "\n" | sort -u))
    done
  done
 # временный файл преобразуется в JSON и удаляется
-cat /tmp/$rand.txt | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0], "volid":.[1], "ctime":.[2], "storage":.[3], "type":.[4] } )'
+cat /tmp/$rand.txt | sed '/^$/d' | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0], "volid":.[1], "ctime":.[2], "storage":.[3], "type":.[4] } )'
 rm -f /tmp/$rand.txt
 
 else
