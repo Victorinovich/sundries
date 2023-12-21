@@ -27,7 +27,7 @@ arr1=($(echo $string_stor | tr " " "\n" | sort -u))
      done
   echo $storage $storage_avail $summ_last_backups $summ_first_backups >> /tmp/$rand.txt
   done
-cat /tmp/$rand.txt | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "storage":.[0], "freespace":.[1], "sumlastbackups":.[2], "sumfirstbackups":.[3] } )'
+cat /tmp/$rand.txt | sed '/^$/d' | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "storage":.[0], "freespace":.[1], "sumlastbackups":.[2], "sumfirstbackups":.[3] } )'
 rm -f /tmp/$rand.txt
 
 else
