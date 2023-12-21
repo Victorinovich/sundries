@@ -35,7 +35,7 @@ fi
 done
 
 # временный файл преобразовываем в JSON и удаляем
-cat /tmp/$rndfile.txt | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0] } )'
+cat /tmp/$rndfile.txt | sed '/^$/d' | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0] } )'
 rm -f /tmp/$rndfile.txt
 
 else
