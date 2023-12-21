@@ -25,7 +25,7 @@ postmap /etc/postfix/recipient_canonical
 echo "/^From: (.*)/ REPLACE From: $name <root@$mymailname>" > /etc/postfix/smtp_header_checks
 
 touch /etc/postfix/postfix-files
-
+systemctl restart postfix
 postfix reload
 
 sed -i 's/MAILADDR.*/MAILADDR root/' /etc/mdadm/mdadm.conf
