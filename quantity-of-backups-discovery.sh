@@ -40,7 +40,7 @@ do
 done
 
 # временный файл преобразуется в JSON и удаляется
-cat /tmp/$rand.txt | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0], "sumbackups":.[1] } )'
+cat /tmp/$rand.txt | sed '/^$/d' | jq -Rs 'split("\n") | map(split(" ")) | .[0:-1] | map( { "vmid":.[0], "sumbackups":.[1] } )'
 rm -f /tmp/$rand.txt
 
 else
