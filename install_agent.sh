@@ -19,6 +19,12 @@ RELEASE=`lsb_release -r  | awk '{print $2}' | cut -f '1' -d.`
          apt update
          apt install zabbix-agent -y
          ;;
+         "12")
+         wget http://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
+         dpkg -i zabbix-release_6.0-5+debian12_all.deb
+         apt update
+         apt install zabbix-agent -y
+         ;;
          *) 
          echo "Дистрибутив не поддерживается"
          exit
