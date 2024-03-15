@@ -22,7 +22,7 @@ node=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes 
 pbsstorage=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .storage,"\n"' | grep "pbs-" | tr " " "\n" | sort -u`
 
 # массив arr2 содержит все vmid с включёнными бэкапами
-arr2=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .storage,"=",.enabled,"=",.vmid,"=","\n"' | grep $pbsstorage | sed -r "s/(${pbsstorage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g")))
+arr2=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .storage,"=",.enabled,"=",.vmid,"=","\n"' | grep $pbsstorage | grep -v $pbsstorage=0 | sed -r "s/(${pbsstorage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g")))
 for vmid in ${arr2[*]}
 do
   # массив arr3 содержит все ctime бэкапов для vmid
