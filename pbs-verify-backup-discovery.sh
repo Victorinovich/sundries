@@ -1,5 +1,6 @@
 #!/bin/bash
 
+APITOKEN=$(cat token.txt)
 URL=$1
 NUMOFBACKUPS=$2
 
