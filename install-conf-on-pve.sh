@@ -21,7 +21,7 @@ pveum user token add zabbixAPI@pve zabbix --privsep 0 > /tmp/token.temp
 var1=`cat /tmp/token.temp | grep tokenid | awk '{print $4}'`
 var2=`cat /tmp/token.temp | grep value | tail -n1 | awk '{print $4}'`
 APITOKEN=`echo -n $var1"="$var2`
-sed -i '3i APITOKEN='"$APITOKEN"'' /etc/zabbix/zabbix_agentd.d/*.sh
+echo "APITOKEN=$APITOKEN" > /etc/zabbix/zabbix_agentd.d/token.txt
 rm -f /tmp/token.temp
 sleep 3
 systemctl restart zabbix-agent
