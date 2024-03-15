@@ -1,5 +1,6 @@
 #!/bin/bash
 
+APITOKEN=$(cat token.txt)
 URL=$1
 
 check_access=`curl --connect-timeout 10 -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes`
