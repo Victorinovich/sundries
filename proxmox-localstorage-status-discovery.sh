@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APITOKEN=$(cat token.txt)
+APITOKEN=$(cat /etc/zabbix/zabbix_agentd.d/token.txt)
 URL=$1
 
 check_access=`curl --connect-timeout 10 -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes`
