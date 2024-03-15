@@ -1,5 +1,6 @@
 #!/bin/bash
 
+APITOKEN=$(cat token.txt)
 URL=$1
 
 # проверка доступности API на случай неправильного URL и(или) токена
