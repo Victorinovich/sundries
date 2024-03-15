@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APITOKEN=$(cat token.txt)
+APITOKEN=$(cat /etc/zabbix/zabbix_agentd.d/token.txt)
 URL=$1
 PERIOD=$2
 
