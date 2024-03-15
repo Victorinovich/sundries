@@ -15,7 +15,7 @@ arr1=($(echo $string_stor | tr " " "\n" | sort -u))
   do
   summ_last_backups=0
   summ_first_backups=0
-  string_vmid=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .storage,"=",.enabled,"=",.vmid,"=","\n"' | grep $storage | sed -r "s/(${storage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g" `
+  string_vmid=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .storage,"=",.enabled,"=",.vmid,"=","\n"' | grep $storage | grep -v $storage=0 | sed -r "s/(${storage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g" `
   storage_avail=`curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/nodes/$node/storage/$storage/status | jq -jr '.data | .avail,"\n"'`
   arr2=($(echo $string_vmid))
      for vmid in ${arr2[*]}
