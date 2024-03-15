@@ -1,5 +1,6 @@
 #!/bin/bash
 
+APITOKEN=$(cat token.txt)
 URL=$1
 VMIDEXCLUDE=$2
 
@@ -23,7 +24,7 @@ done
 #echo ${arr1[@]}
 
 # В массив arr2 выводим VMID, у которых бэкапы включены
-arr2=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .enabled,"=",.vmid,"=","\n"' | sed -r "s/(${storage}|==[^=]*=|=1=|=)//g" | sed "s/,/ /g") | tr " " "\n" | sort -u))
+arr2=($(echo $(curl -s -k -H "Authorization: PVEAPIToken=$APITOKEN" $URL/api2/json/cluster/backup | jq -jr '.data[] | .enabled,"=",.vmid,"=","\n"' | grep -v "^0=" | sed -r "s/(${storage}|==[^=]*=|=1=|1=|=)//g" | sed "s/,/ /g") | tr " " "\n" | sort -u))
 
 # В массив arr3 помещаем исключённые макросом VMID (т.е. виртуалки, которые работают, но для которых не нужен обязательный бэкап)
 arr3=($(echo $VMIDEXCLUDE | sed "s/,/ /g" | sort -u))
