@@ -1,2 +1,0 @@
-# Collect data iops for zabbix - just execute "crontab -e" and write this line:
-* * * * * root DATA=$(S_TIME_FORMAT=ISO /usr/bin/iostat -yxdt -o JSON 59 1) ; echo "$DATA" >/tmp/iostat-cron.out
